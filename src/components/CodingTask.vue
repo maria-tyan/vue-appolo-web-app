@@ -41,12 +41,19 @@
 
           <!-- Loading -->
           <div v-if="loading" class="loading">
-            Loading...
+            <p class="text">
+              Loading...
+            </p>
           </div>
 
           <!-- Error -->
           <div v-else-if="error" class="error">
-            An error occurred. You must run the server to see results.
+            <p class="text">
+              An error occurred.
+            </p>
+            <p class="text">
+              You must run the server to see results.
+            </p>
           </div>
 
           <!-- Result -->

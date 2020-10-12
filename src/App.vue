@@ -1,18 +1,18 @@
 <template>
   <div id="app">
     <CodingTask />
-    <ApolloExample />
+    <!-- <ApolloExample /> -->
   </div>
 </template>
 
 <script>
-import ApolloExample from './components/ApolloExample.vue';
+// import ApolloExample from './components/ApolloExample.vue';
 import CodingTask from './components/CodingTask.vue';
 
 export default {
   name: 'App',
   components: {
-    ApolloExample,
+    // ApolloExample,
     CodingTask,
   },
 };

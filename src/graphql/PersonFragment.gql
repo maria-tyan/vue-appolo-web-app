@@ -1,4 +1,0 @@
-fragment person on Person {
-  val1
-  val2
-}

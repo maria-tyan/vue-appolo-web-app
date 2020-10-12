@@ -1,5 +1,16 @@
 # vue-appolo-web-app
 
+Web app using VueJS and Apollo + Graphql
+
+The application includes:
+a. A simple page with:
+i. An input text box that will take in a numeric value between 1 and 10 characters
+ii. A button
+iii. An overlay with results
+b. A Graphql Back-End 
+c. A mocked REST Service with the following endpoints: /person,
+/facility and /exposure
+
 ## Project setup
 ```
 npm install
@@ -15,10 +26,11 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
+### Graphql Back-End 
 ```
-npm run lint
+npm run apollo
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### A mocked REST Service
+```
+npm run rest
+```

@@ -1,10 +1,16 @@
 <template>
   <div class="card">
-    <transition name="animation" mode="out-in">
+    <transition name="animated-block" mode="out-in">
       <div
-        v-if="animate"
-        class="animation"
+        v-if="showForm"
+        class="animated-block"
       >
+        <h1 class="title">
+          Hello!
+        </h1>
+        <p class="text">
+          Please, choose a valid value between 1 and 10.
+        </p>
         <form class="form" @submit.prevent>
           <input
             v-model.number="number"
@@ -15,42 +21,51 @@
             class="form__button button"
             type="submit"
             :disabled="isDisabled"
+            @click="submitForm"
           >
             Submit form
           </button>
         </form>
       </div>
-    </transition>
+      <ApolloQuery
+        v-else
+        class="overlay"
+        :query="require('../graphql/Request.gql')"
+        :variables="{ input1: number }"
+      >
+        <div slot-scope="{ result: { loading, error, data } }">
+          <font-awesome-icon
+            icon="times"
+            class="button-close" @click="closeOverlay"
+          />
 
-    <ApolloQuery
-      :query="require('../graphql/Persons.gql')"
-    >
-      <div slot-scope="{ result: { loading, error, data } }">
-
-        <!-- Loading -->
-        <div v-if="loading" class="loading apollo">Loading...</div>
-
-        <!-- Error -->
-        <div v-else-if="error" class="error apollo">An error occured</div>
-
-        <!-- Result -->
-        <div v-else-if="data" class="result apollo">
-          <div
-            v-for="person of data.persons"
-            :key="person.val1"
-            class="person"
-          >
-            {{ person.val2 }}
+          <!-- Loading -->
+          <div v-if="loading" class="loading">
+            Loading...
           </div>
-        </div>
 
-        <!-- No result -->
-        <div v-else class="no-result apollo">No result :(</div>
-      </div>
-    </ApolloQuery>
-    <button class="form__button button" @click="showForm">
-      Show form
-    </button>
+          <!-- Error -->
+          <div v-else-if="error" class="error">
+            An error occurred. You must run the server to see results.
+          </div>
+
+          <!-- Result -->
+          <div v-else-if="data" class="result">
+            <h3 class="title">
+              Multiplying request results:
+            </h3>
+            <div
+              class="result__info"
+            >
+              {{ data.request[0] * data.request[1] }}
+            </div>
+          </div>
+
+          <!-- No result -->
+          <div v-else class="no-result apollo">No results :(</div>
+        </div>
+      </ApolloQuery>
+    </transition>
   </div>
 </template>
 
@@ -59,7 +74,7 @@ export default {
   data() {
     return {
       number: 1,
-      animate: true,
+      showForm: true,
     };
   },
   computed: {
@@ -68,8 +83,11 @@ export default {
     },
   },
   methods: {
-    showForm() {
-      this.animate = !this.animate;
+    closeOverlay() {
+      this.showForm = true;
+    },
+    submitForm() {
+      this.showForm = false;
     },
   },
 };
@@ -77,6 +95,7 @@ export default {
 
 <style lang="less">
   .card {
+    position: relative;
     background: #003755;
     display: flex;
     flex-direction: column;
@@ -88,6 +107,45 @@ export default {
     height: 500px;
     max-width: 500px;
     margin: 0 auto;
+  }
+
+  .button-close {
+    position: absolute;
+    left: auto;
+    right: 0;
+    top: 0;
+    padding: 20px;
+    cursor: pointer;
+    z-index: 2;
+  }
+
+  .overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #d7e9f1;
+    color: #003755;
+  }
+
+  .title {
+    font-weight: 400;
+    font-style: italic;
+    font-size: 40px;
+    font-family: Georgia;
+    margin: 0 0 20px;
+  }
+
+  .text {
+    color: #d7e9f1;
+    font-family: Verdana;
+    font-size: 16px;
+    margin: 0 0 40px;
   }
 
   .form {
@@ -127,20 +185,6 @@ export default {
       &[type=number] {
         -moz-appearance: textfield;
       }
-
-      // .numeric-input {
-      //   outline: none;
-      //   border: 0px solid transparent !important;
-      //   border-radius: 50px !important;
-      //   font-size: 16px;
-      //   color: #003755;
-      //   height: 100%;
-      //   transition: box-shadow .3s;
-
-      //   &:hover {
-      //     box-shadow: 0 0 11px rgba(white,.13);
-      //   }
-      // }
     }
 
     &__button {
@@ -177,11 +221,20 @@ export default {
     }
   }
 
-  .animation-enter-active, .animation-leave-active {
-    transition: all .5s ease;
-  }
-  .animation-enter, .animation-leave-to {
-    transform: translateX(10px);
-    opacity: 0;
+  .animated-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &-enter-active,
+    &-leave-active {
+      transition: all .25s ease;
+    }
+
+    &-enter,
+    &-leave-to {
+      opacity: 0;
+    }
   }
 </style>

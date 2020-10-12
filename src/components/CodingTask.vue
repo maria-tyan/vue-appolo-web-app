@@ -36,7 +36,7 @@
         <div slot-scope="{ result: { loading, error, data } }">
           <font-awesome-icon
             icon="times"
-            class="button-close" @click="closeOverlay"
+            class="overlay__button-close" @click="closeOverlay"
           />
 
           <!-- Loading -->
@@ -52,8 +52,11 @@
           <!-- Result -->
           <div v-else-if="data" class="result">
             <h3 class="title">
-              Multiplying request results:
+              Results
             </h3>
+            <p class="text">
+              Multiplying request results
+            </p>
             <div
               class="result__info"
             >
@@ -92,149 +95,3 @@ export default {
   },
 };
 </script>
-
-<style lang="less">
-  .card {
-    position: relative;
-    background: #003755;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    padding: 50px;
-    width: 100%;
-    height: 500px;
-    max-width: 500px;
-    margin: 0 auto;
-  }
-
-  .button-close {
-    position: absolute;
-    left: auto;
-    right: 0;
-    top: 0;
-    padding: 20px;
-    cursor: pointer;
-    z-index: 2;
-  }
-
-  .overlay {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #d7e9f1;
-    color: #003755;
-  }
-
-  .title {
-    font-weight: 400;
-    font-style: italic;
-    font-size: 40px;
-    font-family: Georgia;
-    margin: 0 0 20px;
-  }
-
-  .text {
-    color: #d7e9f1;
-    font-family: Verdana;
-    font-size: 16px;
-    margin: 0 0 40px;
-  }
-
-  .form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    &__input {
-      margin: 0 10px;
-      padding: 0;
-      background-color: white;
-      border: 1px solid rgba(0,0,0,.13);
-      border-radius: 6px;
-      font-size: 18px;
-      font-weight: 700;
-      width: 200px;
-      height: 50px;
-      border-radius: 50px;
-      font-size: 16px;
-      color: #003755;
-      outline: none;
-      transition: box-shadow .3s;
-      text-align: center;
-
-      &:hover {
-        box-shadow: 0 0 11px rgba(white,.13);
-      }
-
-      /* Chrome, Safari, Edge, Opera */
-      &::-webkit-outer-spin-button,
-      &::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-        margin: 0;
-      }
-
-      /* Firefox */
-      &[type=number] {
-        -moz-appearance: textfield;
-      }
-    }
-
-    &__button {
-      position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 6px;
-      background-color: #009edd;
-      color: white;
-      border-radius: 50px;
-      border: none;
-      width: 200px;
-      height: 50px;
-      padding: 0;
-      margin: 10px;
-      font-size: 16px;
-      font-weight: 700;
-      text-transform: uppercase;
-      transition: all .5s ease-in;
-      outline: none;
-      cursor: pointer;
-      overflow: hidden;
-      transition: all .3s;
-
-      &:hover {
-        box-shadow: 0 4px 4px rgba(white,.13);
-      }
-
-      &:disabled {
-        cursor: default;
-        opacity: .5;
-      }
-    }
-  }
-
-  .animated-block {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    &-enter-active,
-    &-leave-active {
-      transition: all .25s ease;
-    }
-
-    &-enter,
-    &-leave-to {
-      opacity: 0;
-    }
-  }
-</style>

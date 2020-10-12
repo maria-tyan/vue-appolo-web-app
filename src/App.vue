@@ -1,34 +1,25 @@
 <template>
   <div id="app">
     <CodingTask />
-    <!-- <ApolloExample /> -->
   </div>
 </template>
 
 <script>
-// import ApolloExample from './components/ApolloExample.vue';
 import CodingTask from './components/CodingTask.vue';
 
 export default {
   name: 'App',
   components: {
-    // ApolloExample,
     CodingTask,
   },
 };
 </script>
 
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-* {
-  box-sizing: inherit;
-}
+  @import "./styles/global.less";
+  @import "./styles/variables.less";
+  @import "./styles/card.less";
+  @import "./styles/form.less";
+  @import "./styles/overlay.less";
+  @import "./styles/animated-block.less";
 </style>

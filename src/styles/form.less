@@ -1,0 +1,72 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__input {
+    margin: 0 10px;
+    padding: 0;
+    background-color: white;
+    border: 1px solid rgba(black,.13);
+    border-radius: 6px;
+    font-size: 18px;
+    font-weight: 700;
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    font-size: 16px;
+    color: @color__dark-blue;
+    outline: none;
+    transition: box-shadow .3s;
+    text-align: center;
+
+    &:hover {
+      box-shadow: 0 0 11px rgba(white,.23);
+    }
+
+    /* Chrome, Safari, Edge, Opera */
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+    /* Firefox */
+    &[type=number] {
+      -moz-appearance: textfield;
+    }
+  }
+
+  &__button {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 6px;
+    background-color: @color__blue;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    width: 200px;
+    height: 50px;
+    padding: 0;
+    margin: 10px;
+    font-size: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all .5s ease-in;
+    outline: none;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all .3s;
+
+    &:hover {
+      box-shadow: 0 4px 4px rgba(white,.23);
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: .5;
+    }
+  }
+}

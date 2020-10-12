@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "apollo": "node graphql-minimal/server.js",
+    "graphql": "node graphql-minimal/server.js",
     "rest": "node my-service.js"
   },
   "dependencies": {
@@ -20,7 +20,13 @@
     "shortid": "^2.2.8",
     "vue": "^2.6.11",
     "vue-apollo": "^3.0.0-beta.11",
-    "vue-cli-plugin-apollo": "^0.22.2"
+    "vue-cli-plugin-apollo": "^0.22.2",
+    "apollo-server": "^2.18.2",
+    "apollo-server-express": "^2.18.2",
+    "express": "^4.17.1",
+    "express-graphql": "^0.11.0",
+    "graphql": "^15.3.0",
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

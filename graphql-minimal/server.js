@@ -2,6 +2,7 @@ const express = require('express');
 const fetch = require('node-fetch');
 const { ApolloServer } = require('apollo-server-express');
 const { makeExecutableSchema } = require('graphql-tools');
+const fetchData = require('../helpers/fetchData');
 
 // Construct a schema, using GraphQL schema language
 const typeDefs = `
@@ -16,9 +17,9 @@ const localHostName = 'http://127.0.0.1:8888';
 const resolvers = {
   Query: {
     request: async (root, args) => {
-      const person = await fetch(`${localHostName}/person/${args.input1}`).then((res) => res.json());
-      const facility = await fetch(`${localHostName}/facility/${person.val1}`).then((res) => res.json());
-      const exposure = await fetch(`${localHostName}/exposure/${person.val2}`).then((res) => res.json());
+      const person = await fetchData(`${localHostName}/person/${args.input1}`);
+      const facility = await fetchData(`${localHostName}/facility/${person.val1}`);
+      const exposure = await fetchData(`${localHostName}/exposure/${person.val2}`);
 
       return [facility.val3, exposure.val5];
     },
